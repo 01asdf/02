@@ -25,7 +25,8 @@ def main():
 
     # define paths
     path_project = os.path.abspath('..')
-    logger = SummaryWriter('../logs')
+    #logger = SummaryWriter('../logs')
+    logger = None
     args = args_parser()
     args=adatok.arguments(args)
     exp_details(args)
