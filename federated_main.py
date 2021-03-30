@@ -11,7 +11,7 @@ import numpy as np
 from tqdm import tqdm
 
 import torch
-from tensorboardX import SummaryWriter
+#from tensorboardX import SummaryWriter
 
 from options import args_parser
 from update import LocalUpdate, test_inference
@@ -83,7 +83,6 @@ def main():
         m = max(int(args.frac * args.num_users), 1)
         idxs_users = np.random.choice(range(args.num_users), m, replace=False)
         for idx in idxs_users:
-            print(idx)
             local_model = LocalUpdate(args=args, dataset=train_dataset,
                                       idxs=user_groups[idx], logger=logger)
             w, loss = local_model.update_weights(

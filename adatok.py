@@ -3,7 +3,7 @@ import labeling
 
 class data:
     outputfile=""
-    config_number=1
+    config_number=0
     model='mlp'
     dataset='mnist'
 
@@ -52,18 +52,18 @@ class data:
 
     # Hány képet kapjon a résztvevő
     user_images_count = [
-        200,
-        200,
-        200,
-        200,
-        200,
-        200,
-        200,
-        200,
-        200,
-        200,
-        200,
-        200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
+        200,200,200,200,200,
         200
     ]
 
@@ -82,11 +82,15 @@ class data:
     lr=[0.1,0.01,0.001,0.0001]
     act_do=0.0
     act_lr=0.0
+    users=[25,5]
+    adathalmazok=['mnist','cifar']
+    modellek=['mlp','cnn']
+    act_users=5
 
 def arguments(args):
     args.model=data.model
     args.dataset=data.dataset
-    args.num_users=sum(data.actual_train_group_in_binary)
+    args.num_users=data.act_users
     args.frac=data.act_do
     args.lr=data.act_lr
     return args
@@ -106,12 +110,6 @@ def init():
         s= f.read()
         data.user_labels_percents.append(list(f.read().split(' ')))
         data.user_labels_percents.remove(data.user_labels_percents[len(data.user_labels_percents)-1])
-        if len(data.user_labels_percents) < data.num_users:
-            raise Exception("Wrong config1")
-        for i in data.user_labels_percents:
-            print(len(i))
-            if len(i)!=10:
-                raise Exception("Wrong config")
     if not data.data_are_correct != False:  #Ha nem helyesek az adatok visszatérünk
         return
 
