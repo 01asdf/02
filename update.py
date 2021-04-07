@@ -124,24 +124,24 @@ def test_inference(args, model, test_dataset):
                             shuffle=False)
 
     for batch_idx, (images, labels) in enumerate(testloader):
-        if adatok.data.actual_test_group_in_binary[batch_idx%adatok.data.num_users]==1:
-            images, labels = images.to(device), labels.to(device)
-            j=0
-            for i in labels:
-                if adatok.data.user_labels_percents[batch_idx%adatok.data.num_users][int(i)]==0:
-                    labels=torch.cat([labels[:j],labels[j+1:]])
-                    images=torch.cat([images[:j],images[j+1:]])
-                j+=1
+#        if adatok.data.actual_test_group_in_binary[batch_idx%adatok.data.num_users]==1:
+        images, labels = images.to(device), labels.to(device)
+        j=0
+        for i in labels:
+            if adatok.data.user_labels_percents[batch_idx%adatok.data.num_users][int(i)]==0:
+                labels=torch.cat([labels[:j],labels[j+1:]])
+                images=torch.cat([images[:j],images[j+1:]])
+            j+=1
 
-            # Inference
-            outputs = model(images)
-            batch_loss = criterion(outputs, labels)
-            loss += batch_loss.item()
+        # Inference
+        outputs = model(images)
+        batch_loss = criterion(outputs, labels)
+        loss += batch_loss.item()
 
-            # Prediction
-            _, pred_labels = torch.max(outputs, 1)
-            pred_labels = pred_labels.view(-1)
-            correct += torch.sum(torch.eq(pred_labels, labels)).item()
-            total += len(labels)
+        # Prediction
+        _, pred_labels = torch.max(outputs, 1)
+        pred_labels = pred_labels.view(-1)
+        correct += torch.sum(torch.eq(pred_labels, labels)).item()
+        total += len(labels)
     accuracy = correct/total
     return accuracy, loss

@@ -117,15 +117,16 @@ def main():
             print('Train Accuracy: {:.2f}% \n'.format(100*train_accuracy[-1]))'''
 
         # Test inference after completion of training
-        for i in adatok.data.test_groups_in_binary:
-            adatok.data.actual_test_group_in_binary=i
-            test_acc, test_loss = test_inference(args, global_model, test_dataset)
-            print("Resoults")
-            print(epoch)
-            print(adatok.data.actual_train_group_in_binary)
-            print(adatok.data.actual_test_group_in_binary)
-            print(test_acc)
-            print(test_loss)
+        #for i in adatok.data.test_groups_in_binary:
+        #adatok.data.actual_test_group_in_binary=i
+        test_acc, test_loss = test_inference(args, global_model, test_dataset)
+        print("Resoults")
+        print(epoch)
+        print(adatok.data.actual_train_group_in_binary)
+        print(adatok.data.actual_test_group_in_binary)
+        print(test_acc)
+        print(test_loss)
+        print("UJKOR")
     '''
     print(f' \n Results after {args.epochs} global rounds of training:')
     print("|---- Avg Train Accuracy: {:.2f}%".format(100*train_accuracy[-1]))

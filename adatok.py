@@ -78,8 +78,8 @@ class data:
     #Futás közben
     actual_user=0
     image_initialization=True
-    do=[0.0,0.1,0.2,0.3]
-    lr=[0.1,0.01,0.001,0.0001]
+    do=[0.2]
+    lr=[0.15,0.05]
     act_do=0.0
     act_lr=0.0
     users=[25,5]
@@ -125,12 +125,16 @@ def init():
             if sum_of_binary == data.num_users - 1:
                 data.train_groups_in_binary.append(binary)
 
-    else:
+    '''else:
         for i in range(2**data.num_users-1, 2 ** data.num_users):
             binary = numberToBinary(i)
             data.train_groups_in_binary.append(binary)
             data.test_groups_in_binary.append(binary)
-        #data.train_groups_in_binary.append(numberToBinary((2**data.num_users)-1))
+        #data.train_groups_in_binary.append(numberToBinary((2**data.num_users)-1))'''
+    data.test_groups_in_binary=[]
+    data.train_groups_in_binary=[]
+    data.train_groups_in_binary.append(numberToBinary(2 ** data.num_users -1))
+    data.test_groups_in_binary.append(numberToBinary(2 ** data.num_users -1))
 
     data.actual_test_group_in_binary =  data.test_groups_in_binary[0]
     data.actual_train_group_in_binary = data.train_groups_in_binary[0]
