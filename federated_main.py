@@ -120,6 +120,7 @@ def main():
         #for i in adatok.data.test_groups_in_binary:
         #adatok.data.actual_test_group_in_binary=i
         test_acc, test_loss = test_inference(args, global_model, test_dataset)
+        print("K")
         print("Resoults")
         print(epoch)
         print(adatok.data.actual_train_group_in_binary)

@@ -16,12 +16,12 @@ def main():
                             adatok.data.dataset=a
                             adatok.data.act_lr=l
                             adatok.data.act_do=d
-
+                            sys.stdout=open("teszt_"+str(u)+"_"+str(db)+"_"+m+"_"+a+"_"+str(d)+"_"+str(l)+".txt",'w')
                             adatok.init()
                             if adatok.data.image_initialization==True:
                                 federated_main.main()
                             federated_main.main()
-                            #sys.stdout=open("teszt_"+str(u)+"_"+str(db)+"_"+m+"_"+a+"_"+str(d)+"_"+str(l)+".txt",'w')
+
                             '''
                             for i in adatok.data.train_groups_in_binary:
                                 adatok.data.actual_train_group_in_binary=i
