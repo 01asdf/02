@@ -7,6 +7,7 @@ from torch import nn
 from torch.utils.data import DataLoader, Dataset
 import adatok
 
+
 class DatasetSplit(Dataset):
     """An abstract Dataset class wrapped around Pytorch Dataset class.
     """
@@ -39,19 +40,19 @@ class LocalUpdate(object):
         and user indexes.
         """
         # split indexes for train, validation, and test (80, 10, 10)
-        idxs_train = idxs[:int(0.8*len(idxs))]
-        idxs_val = idxs[int(0.8*len(idxs)):int(0.9*len(idxs))]
-        idxs_test = idxs[int(0.9*len(idxs)):]
+        idxs_train = idxs[:int(0.8 * len(idxs))]
+        idxs_val = idxs[int(0.8 * len(idxs)):int(0.9 * len(idxs))]
+        idxs_test = idxs[int(0.9 * len(idxs)):]
 
         trainloader = DataLoader(DatasetSplit(dataset, idxs_train),
                                  batch_size=self.args.local_bs, shuffle=True)
         validloader = DataLoader(DatasetSplit(dataset, idxs_val),
-                                 batch_size=int(len(idxs_val)/10), shuffle=False)
+                                 batch_size=int(len(idxs_val) / 10), shuffle=False)
         testloader = DataLoader(DatasetSplit(dataset, idxs_test),
-                                batch_size=int(len(idxs_test)/10), shuffle=False)
+                                batch_size=int(len(idxs_test) / 10), shuffle=False)
         return trainloader, validloader, testloader
 
-    def update_weights(self, model, global_round):
+    def update_weights(self, model):
         # Set mode to train model
         model.train()
         epoch_loss = []
@@ -80,9 +81,9 @@ class LocalUpdate(object):
                         global_round, iter, batch_idx * len(images),
                         len(self.trainloader.dataset),
                         100. * batch_idx / len(self.trainloader), loss.item()))'''
-                #self.logger.add_scalar('loss', loss.item())
+                # self.logger.add_scalar('loss', loss.item())
                 batch_loss.append(loss.item())
-            epoch_loss.append(sum(batch_loss)/len(batch_loss))
+            epoch_loss.append(sum(batch_loss) / len(batch_loss))
 
         return model.state_dict(), sum(epoch_loss) / len(epoch_loss)
 
@@ -107,7 +108,7 @@ class LocalUpdate(object):
             correct += torch.sum(torch.eq(pred_labels, labels)).item()
             total += len(labels)
 
-        accuracy = correct/total
+        accuracy = correct / total
         return accuracy, loss
 
 
@@ -124,14 +125,14 @@ def test_inference(args, model, test_dataset):
                             shuffle=False)
 
     for batch_idx, (images, labels) in enumerate(testloader):
-        if adatok.data.actual_test_group_in_binary[batch_idx%adatok.data.num_users]==1:
+        if adatok.data.actual_test_group_in_binary[batch_idx % adatok.data.num_users] == 1:
             images, labels = images.to(device), labels.to(device)
-            j=0
+            j = 0
             for i in labels:
-                if adatok.data.user_labels_percents[batch_idx%adatok.data.num_users][int(i)]==0:
-                    labels=torch.cat([labels[:j],labels[j+1:]])
-                    images=torch.cat([images[:j],images[j+1:]])
-                j+=1
+                if adatok.data.user_labels_percents[batch_idx % adatok.data.num_users][int(i)] == 0:
+                    labels = torch.cat([labels[:j], labels[j + 1:]])
+                    images = torch.cat([images[:j], images[j + 1:]])
+                j += 1
 
             # Inference
             outputs = model(images)
@@ -143,5 +144,5 @@ def test_inference(args, model, test_dataset):
             pred_labels = pred_labels.view(-1)
             correct += torch.sum(torch.eq(pred_labels, labels)).item()
             total += len(labels)
-    accuracy = correct/total
+    accuracy = correct / total
     return accuracy, loss

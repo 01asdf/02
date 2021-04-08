@@ -61,12 +61,11 @@ def args_parser():
     parser.add_argument('--verbose', type=int, default=1, help='verbose')
     parser.add_argument('--seed', type=int, default=1, help='random seed')
 
-    #my args
+    # my args
     parser.add_argument('-c', type=int, default=1, help='my args')
     parser.add_argument('-n', type=int, default=1, help='my args')
     parser.add_argument('-d', type=str, default=1, help='my args')
     parser.add_argument('-m', type=str, default=1, help='my args')
-
 
     args = parser.parse_args()
     return args

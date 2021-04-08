@@ -14,7 +14,6 @@ from options import args_parser
 from update import test_inference
 from models import MLP, CNNMnist, CNNFashion_Mnist, CNNCifar
 
-
 if __name__ == '__main__':
     args = args_parser()
     if args.gpu:
@@ -76,11 +75,11 @@ if __name__ == '__main__':
 
             if batch_idx % 50 == 0:
                 print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch+1, batch_idx * len(images), len(trainloader.dataset),
+                    epoch + 1, batch_idx * len(images), len(trainloader.dataset),
                     100. * batch_idx / len(trainloader), loss.item()))
             batch_loss.append(loss.item())
 
-        loss_avg = sum(batch_loss)/len(batch_loss)
+        loss_avg = sum(batch_loss) / len(batch_loss)
         print('\nTrain loss:', loss_avg)
         epoch_loss.append(loss_avg)
 
@@ -95,4 +94,4 @@ if __name__ == '__main__':
     # testing
     test_acc, test_loss = test_inference(args, global_model, test_dataset)
     print('Test on', len(test_dataset), 'samples')
-    print("Test Accuracy: {:.2f}%".format(100*test_acc))
+    print("Test Accuracy: {:.2f}%".format(100 * test_acc))
