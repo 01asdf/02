@@ -70,7 +70,7 @@ class data:
 
     #Ezeket az init függvénynek kell kitöltenie a beállítások szerint
     train_groups_in_binary = []
-    actual_train_group_in_binary = [1,1,1,1,1]
+    actual_train_group_in_binary = []
 
     test_groups_in_binary = []
     actual_test_group_in_binary = []
@@ -78,14 +78,12 @@ class data:
     #Futás közben
     actual_user=0
     image_initialization=True
-    do=[0.0,0.1,0.2,0.3]
-    lr=[0.1,0.01,0.001,0.0001]
     act_do=0.0
     act_lr=0.0
-    users=[25,5]
+    users=[2,3]
     adathalmazok=['mnist','cifar']
     modellek=['mlp','cnn']
-    act_users=5
+    act_users=2
 
 def arguments(args):
     args.model=data.model
@@ -95,6 +93,11 @@ def arguments(args):
     args.lr=data.act_lr
     return args
 def init():
+    data.train_groups_in_binary = []
+    data.actual_train_group_in_binary = []
+    data.test_groups_in_binary = []
+    data.actual_test_group_in_binary = []
+    data.user_labels_percents=[]
 
     data.dict_users= {i: np.array([]) for i in range(data.num_users)}
     for i in range(data.num_users):
@@ -126,7 +129,7 @@ def init():
                 data.train_groups_in_binary.append(binary)
 
     else:
-        for i in range(2**data.num_users-1, 2 ** data.num_users):
+        for i in range(1, 2 ** data.num_users):
             binary = numberToBinary(i)
             data.train_groups_in_binary.append(binary)
             data.test_groups_in_binary.append(binary)
