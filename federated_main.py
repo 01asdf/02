@@ -72,32 +72,30 @@ def main():
     train_loss, train_accuracy = [], []
     val_acc_list, net_list = [], []
     cv_loss, cv_acc = [], []
-    print_every = 2
     val_loss_pre, counter = 0, 0
 
     for epoch in tqdm(range(args.epochs)):
         local_weights, local_losses = [], []
 
         global_model.train()
-        local_modells = []
         for idx in range(args.num_users):
             local_model = LocalUpdate(args=args, dataset=train_dataset,
                                       idxs=user_groups[idx], logger=logger)
-            w, loss = local_model.update_weights(
-                model=copy.deepcopy(global_model), global_round=epoch)
+            w, loss = local_model.update_weights(model=copy.deepcopy(global_model))
             local_weights.append(copy.deepcopy(w))
-            local_losses.append(copy.deepcopy(loss))
+            local_losses.append(copy.deepcopy(loss)) 
 
-        for i in adatok.data.train_groups_in_binary:
-            adatok.data.actual_train_group_in_binary = i
+        '''
+        for i1 in adatok.data.train_groups_in_binary:
+            adatok.data.actual_train_group_in_binary = i1
             modell_to_aggregate = copy.deepcopy(global_model)
 
             modell_to_aggregate.to(device)
             modell_to_aggregate.train()
 
             aggregation_weights = []
-            for j in range(len(i)):
-                if i[j] == 1:
+            for j in range(len(i1)):
+                if i1[j] == 1:
                     aggregation_weights.append(local_weights[j])
             avarege_w = average_weights(aggregation_weights)
             modell_to_aggregate.load_state_dict(avarege_w)
@@ -106,20 +104,18 @@ def main():
 
 
             # Test inference after completion of training
-            for i in adatok.data.test_groups_in_binary:
-                adatok.data.actual_test_group_in_binary = i
+            for i2 in adatok.data.test_groups_in_binary:
+                adatok.data.actual_test_group_in_binary = i2
                 test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
-                print("Resoults")
-                print(epoch)
-                print(adatok.data.actual_train_group_in_binary)
-                print(adatok.data.actual_test_group_in_binary)
-                print(test_acc)
-
+                print("Results\n", epoch, "\n", adatok.data.actual_train_group_in_binary, "\n",
+                      adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
+        
+        '''
         # update global weights
         global_weights = average_weights(local_weights)
-
-        # update global weights
         global_model.load_state_dict(global_weights)
+
+        print(test_inference(args, global_model, train_dataset)[0])
 
         loss_avg = sum(local_losses) / len(local_losses)
         train_loss.append(loss_avg)
