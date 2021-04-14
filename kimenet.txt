@@ -1,0 +1,161 @@
+
+Experimental details:
+    Model     : mlp
+    Optimizer : sgd
+    Learning  : 0.0
+    Global Rounds   : 3
+
+    Federated parameters:
+    Non-IID
+    Fraction of users  : 0.0
+    Local Batch size   : 10
+    Local Epochs       : 1
+
+
+Experimental details:
+    Model     : mlp
+    Optimizer : sgd
+    Learning  : 0.0
+    Global Rounds   : 3
+
+    Federated parameters:
+    Non-IID
+    Fraction of users  : 0.0
+    Local Batch size   : 10
+    Local Epochs       : 1
+
+Resoults
+0
+[0, 1]
+[0, 1]
+0.1063701923076923
+Resoults
+0
+[0, 1]
+[1, 0]
+0.10523162939297125
+Resoults
+0
+[0, 1]
+[1, 1]
+0.1058
+Resoults
+0
+[1, 0]
+[0, 1]
+0.1063701923076923
+Resoults
+0
+[1, 0]
+[1, 0]
+0.10523162939297125
+Resoults
+0
+[1, 0]
+[1, 1]
+0.1058
+Resoults
+0
+[1, 1]
+[0, 1]
+0.1063701923076923
+Resoults
+0
+[1, 1]
+[1, 0]
+0.10523162939297125
+Resoults
+0
+[1, 1]
+[1, 1]
+0.1058
+Resoults
+1
+[0, 1]
+[0, 1]
+0.1063701923076923
+Resoults
+1
+[0, 1]
+[1, 0]
+0.10523162939297125
+Resoults
+1
+[0, 1]
+[1, 1]
+0.1058
+Resoults
+1
+[1, 0]
+[0, 1]
+0.1063701923076923
+Resoults
+1
+[1, 0]
+[1, 0]
+0.10523162939297125
+Resoults
+1
+[1, 0]
+[1, 1]
+0.1058
+Resoults
+1
+[1, 1]
+[0, 1]
+0.1063701923076923
+Resoults
+1
+[1, 1]
+[1, 0]
+0.10523162939297125
+Resoults
+1
+[1, 1]
+[1, 1]
+0.1058
+Resoults
+2
+[0, 1]
+[0, 1]
+0.1063701923076923
+Resoults
+2
+[0, 1]
+[1, 0]
+0.10523162939297125
+Resoults
+2
+[0, 1]
+[1, 1]
+0.1058
+Resoults
+2
+[1, 0]
+[0, 1]
+0.1063701923076923
+Resoults
+2
+[1, 0]
+[1, 0]
+0.10523162939297125
+Resoults
+2
+[1, 0]
+[1, 1]
+0.1058
+Resoults
+2
+[1, 1]
+[0, 1]
+0.1063701923076923
+Resoults
+2
+[1, 1]
+[1, 0]
+0.10523162939297125
+Resoults
+2
+[1, 1]
+[1, 1]
+0.1058
