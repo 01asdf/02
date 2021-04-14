@@ -88,17 +88,22 @@ def main():
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
 
-        for i in adatok.data.train_groups_in_binary:
-            adatok.data.actual_train_group_in_binary = i
+        for train_group_binary in adatok.data.train_groups_in_binary:
+            adatok.data.actual_train_group_in_binary = train_group_binary
             modell_to_aggregate = copy.deepcopy(global_model)
 
             modell_to_aggregate.to(device)
             modell_to_aggregate.train()
 
             aggregation_weights = []
-            for j in range(len(i)):
-                if i[j] == 1:
-                    aggregation_weights.append(local_weights[j])
+            print("-------------------")
+            print(len(local_weights))
+            print(train_group_binary)
+            hanyadik=0
+            for j in range(len(train_group_binary)):
+                if train_group_binary[j] == 1:
+                    aggregation_weights.append(local_weights[hanyadik])
+                    hanyadik+=1
             avarege_w = average_weights(aggregation_weights)
             modell_to_aggregate.load_state_dict(avarege_w)
 

@@ -31,7 +31,7 @@ class data:
     # Hova legyenek kiírva az eredmények
     results_path = 'eredmenyek.txt'
     # A kísérlet paraméterei
-    num_users = 5
+    num_users = 2
 
     #Még nem használható
     secure_aggregation = False  # A false azt jelenti, hogy minden tanítási kombinációt minden teszt kombinációval végignéz
@@ -99,7 +99,8 @@ def init():
     data.actual_test_group_in_binary = []
     data.user_labels_percents=[]
 
-    data.dict_users= {i: np.array([]) for i in range(data.num_users)}
+    if data.image_initialization:
+        data.dict_users= {i: np.array([]) for i in range(data.num_users)}
     for i in range(data.num_users):
         data.user_images_indexes.append([])
     #Adatok ellenőrzése
