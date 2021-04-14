@@ -36,7 +36,7 @@ def main():
 
     # load dataset and user groups
     train_dataset, test_dataset, user_groups = get_dataset(args)
-    if adatok.data.image_initialization == True:
+    if adatok.data.image_initialization:
         adatok.data.image_initialization = False
         return
     # BUILD MODEL
