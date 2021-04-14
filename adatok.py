@@ -79,7 +79,7 @@ class data:
     actual_user=0
     image_initialization=True
     do=[0.2]
-    lr=[0.15,0.05]
+    lr=[0.1]
     act_do=0.0
     act_lr=0.0
     users=[25,5]
