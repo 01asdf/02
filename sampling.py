@@ -16,7 +16,7 @@ def mnist_iid(dataset, num_users):
     :param num_users:
     :return: dict of image index
     """
-    num_items = int(len(dataset)/num_users)
+    num_items = int(len(dataset) / num_users)
     dict_users, all_idxs = {}, [i for i in range(len(dataset))]
     for i in range(num_users):
         dict_users[i] = set(np.random.choice(all_idxs, num_items,
@@ -35,13 +35,13 @@ def mnist_noniid(dataset, num_users):
     # 60,000 training imgs -->  200 imgs/shard X 300 shards
     num_shards, num_imgs = 200, 300
     idx_shard = [i for i in range(num_shards)]
-    #ITT
-    users_in_group=adatok.data.actual_train_group_in_binary
-    count_users_in_group=sum(users_in_group)
+    # ITT
+    users_in_group = adatok.data.actual_train_group_in_binary
+    count_users_in_group = sum(users_in_group)
     dict_users = {i: np.array([]) for i in range(adatok.data.num_users)}
 
     if adatok.data.image_initialization:
-        idxs = np.arange(num_shards*num_imgs)
+        idxs = np.arange(num_shards * num_imgs)
         labels = dataset.train_labels.numpy()
 
         # sort labels
@@ -50,31 +50,32 @@ def mnist_noniid(dataset, num_users):
         idxs_labels = idxs_labels[:, idxs_labels[1, :].argsort()]
         idxs = idxs_labels[0, :]
 
-        #Label indexek
+        # Label indexek
         label_idxs = idxs_labels[1, :]
-        index_borders=[0]
-        label_type=0
+        index_borders = [0]
+        label_type = 0
         for i in range(len(label_idxs)):
-            if label_idxs[i]!=label_type:
+            if label_idxs[i] != label_type:
                 index_borders.append(i)
-                label_type+=1
+                label_type += 1
         index_borders.append(len(label_idxs))
 
-
-        which_user_get_data=0
+        which_user_get_data = 0
         for i in range(adatok.data.num_users):
-            num_images_for_user_i=adatok.data.user_images_count[i]
-            for j in range(len(index_borders)-1):
-                if adatok.data.user_labels_percents[i][j]!=0:
-                    images_from_this_label=int(adatok.data.user_labels_percents[i][j]*num_images_for_user_i/100)
-                    start_index=random.randrange(index_borders[j],index_borders[j+1]-images_from_this_label)
+            num_images_for_user_i = adatok.data.user_images_count[i]
+            for j in range(len(index_borders) - 1):
+                if adatok.data.user_labels_percents[i][j] != 0:
+                    images_from_this_label = int(adatok.data.user_labels_percents[i][j] * num_images_for_user_i / 100)
+                    start_index = random.randrange(index_borders[j], index_borders[j + 1] - images_from_this_label)
                     adatok.data.user_images_indexes[which_user_get_data].append(start_index)
-                    dict_users[which_user_get_data] = np.concatenate((dict_users[which_user_get_data], idxs[start_index:start_index+images_from_this_label]), axis=0)
-            which_user_get_data+=1
-        adatok.data.dict_users=dict_users
+                    dict_users[which_user_get_data] = np.concatenate(
+                        (dict_users[which_user_get_data], idxs[start_index:start_index + images_from_this_label]),
+                        axis=0)
+            which_user_get_data += 1
+        adatok.data.dict_users = dict_users
         return dict_users
     else:
-        idxs = np.arange(num_shards*num_imgs)
+        idxs = np.arange(num_shards * num_imgs)
         labels = dataset.train_labels.numpy()
 
         # sort labels
@@ -83,27 +84,28 @@ def mnist_noniid(dataset, num_users):
         idxs_labels = idxs_labels[:, idxs_labels[1, :].argsort()]
         idxs = idxs_labels[0, :]
 
-        #Label indexek
+        # Label indexek
         label_idxs = idxs_labels[1, :]
-        index_borders=[0]
-        label_type=0
+        index_borders = [0]
+        label_type = 0
         for i in range(len(label_idxs)):
-            if label_idxs[i]!=label_type:
+            if label_idxs[i] != label_type:
                 index_borders.append(i)
-                label_type+=1
+                label_type += 1
         index_borders.append(len(label_idxs))
 
-
-        which_user_get_data=0
+        which_user_get_data = 0
         for i in range(adatok.data.num_users):
-            num_images_for_user_i=adatok.data.user_images_count[i]
-            for j in range(len(index_borders)-1):
-                if adatok.data.user_labels_percents[i][j]!=0:
-                    images_from_this_label=int(adatok.data.user_labels_percents[i][j]*num_images_for_user_i/100)
-                    start_index=adatok.data.user_images_indexes[which_user_get_data][j]
-                    dict_users[which_user_get_data] = np.concatenate((dict_users[which_user_get_data], idxs[start_index:start_index+images_from_this_label]), axis=0)
-            which_user_get_data+=1
-        adatok.data.dict_users=dict_users
+            num_images_for_user_i = adatok.data.user_images_count[i]
+            for j in range(len(index_borders) - 1):
+                if adatok.data.user_labels_percents[i][j] != 0:
+                    images_from_this_label = int(adatok.data.user_labels_percents[i][j] * num_images_for_user_i / 100)
+                    start_index = adatok.data.user_images_indexes[which_user_get_data][j]
+                    dict_users[which_user_get_data] = np.concatenate(
+                        (dict_users[which_user_get_data], idxs[start_index:start_index + images_from_this_label]),
+                        axis=0)
+            which_user_get_data += 1
+        adatok.data.dict_users = dict_users
         return dict_users
 
 
@@ -120,7 +122,7 @@ def mnist_noniid_unequal(dataset, num_users):
     num_shards, num_imgs = 1200, 50
     idx_shard = [i for i in range(num_shards)]
     dict_users = {i: np.array([]) for i in range(num_users)}
-    idxs = np.arange(num_shards*num_imgs)
+    idxs = np.arange(num_shards * num_imgs)
     labels = dataset.train_labels.numpy()
 
     # sort labels
@@ -134,7 +136,7 @@ def mnist_noniid_unequal(dataset, num_users):
 
     # Divide the shards into random chunks for every client
     # s.t the sum of these chunks = num_shards
-    random_shard_size = np.random.randint(min_shard, max_shard+1,
+    random_shard_size = np.random.randint(min_shard, max_shard + 1,
                                           size=num_users)
     random_shard_size = np.around(random_shard_size /
                                   sum(random_shard_size) * num_shards)
@@ -150,10 +152,10 @@ def mnist_noniid_unequal(dataset, num_users):
             idx_shard = list(set(idx_shard) - rand_set)
             for rand in rand_set:
                 dict_users[i] = np.concatenate(
-                    (dict_users[i], idxs[rand*num_imgs:(rand+1)*num_imgs]),
+                    (dict_users[i], idxs[rand * num_imgs:(rand + 1) * num_imgs]),
                     axis=0)
 
-        random_shard_size = random_shard_size-1
+        random_shard_size = random_shard_size - 1
 
         # Next, randomly assign the remaining shards
         for i in range(num_users):
@@ -167,7 +169,7 @@ def mnist_noniid_unequal(dataset, num_users):
             idx_shard = list(set(idx_shard) - rand_set)
             for rand in rand_set:
                 dict_users[i] = np.concatenate(
-                    (dict_users[i], idxs[rand*num_imgs:(rand+1)*num_imgs]),
+                    (dict_users[i], idxs[rand * num_imgs:(rand + 1) * num_imgs]),
                     axis=0)
     else:
 
@@ -178,7 +180,7 @@ def mnist_noniid_unequal(dataset, num_users):
             idx_shard = list(set(idx_shard) - rand_set)
             for rand in rand_set:
                 dict_users[i] = np.concatenate(
-                    (dict_users[i], idxs[rand*num_imgs:(rand+1)*num_imgs]),
+                    (dict_users[i], idxs[rand * num_imgs:(rand + 1) * num_imgs]),
                     axis=0)
 
         if len(idx_shard) > 0:
@@ -191,7 +193,7 @@ def mnist_noniid_unequal(dataset, num_users):
             idx_shard = list(set(idx_shard) - rand_set)
             for rand in rand_set:
                 dict_users[k] = np.concatenate(
-                    (dict_users[k], idxs[rand*num_imgs:(rand+1)*num_imgs]),
+                    (dict_users[k], idxs[rand * num_imgs:(rand + 1) * num_imgs]),
                     axis=0)
 
     return dict_users
@@ -204,7 +206,7 @@ def cifar_iid(dataset, num_users):
     :param num_users:
     :return: dict of image index
     """
-    num_items = int(len(dataset)/num_users)
+    num_items = int(len(dataset) / num_users)
     dict_users, all_idxs = {}, [i for i in range(len(dataset))]
     for i in range(num_users):
         dict_users[i] = set(np.random.choice(all_idxs, num_items,
@@ -222,13 +224,13 @@ def cifar_noniid(dataset, num_users):
     """
     num_shards, num_imgs = 200, 250
     idx_shard = [i for i in range(num_shards)]
-    #ITT
-    users_in_group=adatok.data.actual_train_group_in_binary
-    count_users_in_group=sum(users_in_group)
+    # ITT
+    users_in_group = adatok.data.actual_train_group_in_binary
+    count_users_in_group = sum(users_in_group)
     dict_users = {i: np.array([]) for i in range(adatok.data.num_users)}
 
     if adatok.data.image_initialization:
-        idxs = np.arange(num_shards*num_imgs)
+        idxs = np.arange(num_shards * num_imgs)
         labels = np.array(dataset.targets)
 
         # sort labels
@@ -237,31 +239,32 @@ def cifar_noniid(dataset, num_users):
         idxs_labels = idxs_labels[:, idxs_labels[1, :].argsort()]
         idxs = idxs_labels[0, :]
 
-        #Label indexek
+        # Label indexek
         label_idxs = idxs_labels[1, :]
-        index_borders=[0]
-        label_type=0
+        index_borders = [0]
+        label_type = 0
         for i in range(len(label_idxs)):
-            if label_idxs[i]!=label_type:
+            if label_idxs[i] != label_type:
                 index_borders.append(i)
-                label_type+=1
+                label_type += 1
         index_borders.append(len(label_idxs))
 
-
-        which_user_get_data=0
+        which_user_get_data = 0
         for i in range(adatok.data.num_users):
-            num_images_for_user_i=adatok.data.user_images_count[i]
-            for j in range(len(index_borders)-1):
-                if adatok.data.user_labels_percents[i][j]!=0:
-                    images_from_this_label=int(adatok.data.user_labels_percents[i][j]*num_images_for_user_i/100)
-                    start_index=random.randrange(index_borders[j],index_borders[j+1]-images_from_this_label)
+            num_images_for_user_i = adatok.data.user_images_count[i]
+            for j in range(len(index_borders) - 1):
+                if adatok.data.user_labels_percents[i][j] != 0:
+                    images_from_this_label = int(adatok.data.user_labels_percents[i][j] * num_images_for_user_i / 100)
+                    start_index = random.randrange(index_borders[j], index_borders[j + 1] - images_from_this_label)
                     adatok.data.user_images_indexes[which_user_get_data].append(start_index)
-                    dict_users[which_user_get_data] = np.concatenate((dict_users[which_user_get_data], idxs[start_index:start_index+images_from_this_label]), axis=0)
-            which_user_get_data+=1
-        adatok.data.dict_users=dict_users
+                    dict_users[which_user_get_data] = np.concatenate(
+                        (dict_users[which_user_get_data], idxs[start_index:start_index + images_from_this_label]),
+                        axis=0)
+            which_user_get_data += 1
+        adatok.data.dict_users = dict_users
         return dict_users
     else:
-        idxs = np.arange(num_shards*num_imgs)
+        idxs = np.arange(num_shards * num_imgs)
         labels = np.array(dataset.targets)
 
         # sort labels
@@ -270,27 +273,28 @@ def cifar_noniid(dataset, num_users):
         idxs_labels = idxs_labels[:, idxs_labels[1, :].argsort()]
         idxs = idxs_labels[0, :]
 
-        #Label indexek
+        # Label indexek
         label_idxs = idxs_labels[1, :]
-        index_borders=[0]
-        label_type=0
+        index_borders = [0]
+        label_type = 0
         for i in range(len(label_idxs)):
-            if label_idxs[i]!=label_type:
+            if label_idxs[i] != label_type:
                 index_borders.append(i)
-                label_type+=1
+                label_type += 1
         index_borders.append(len(label_idxs))
 
-
-        which_user_get_data=0
+        which_user_get_data = 0
         for i in range(adatok.data.num_users):
-            num_images_for_user_i=adatok.data.user_images_count[i]
-            for j in range(len(index_borders)-1):
-                if adatok.data.user_labels_percents[i][j]!=0:
-                    images_from_this_label=int(adatok.data.user_labels_percents[i][j]*num_images_for_user_i/100)
-                    start_index=adatok.data.user_images_indexes[which_user_get_data][j]
-                    dict_users[which_user_get_data] = np.concatenate((dict_users[which_user_get_data], idxs[start_index:start_index+images_from_this_label]), axis=0)
-            which_user_get_data+=1
-        adatok.data.dict_users=dict_users
+            num_images_for_user_i = adatok.data.user_images_count[i]
+            for j in range(len(index_borders) - 1):
+                if adatok.data.user_labels_percents[i][j] != 0:
+                    images_from_this_label = int(adatok.data.user_labels_percents[i][j] * num_images_for_user_i / 100)
+                    start_index = adatok.data.user_images_indexes[which_user_get_data][j]
+                    dict_users[which_user_get_data] = np.concatenate(
+                        (dict_users[which_user_get_data], idxs[start_index:start_index + images_from_this_label]),
+                        axis=0)
+            which_user_get_data += 1
+        adatok.data.dict_users = dict_users
         return dict_users
 
 
