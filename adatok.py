@@ -82,7 +82,7 @@ class data:
     lr=[0.1,0.01,0.001,0.0001]
     act_do=0.0
     act_lr=0.0
-    users=[25,5]
+    users=[5]
     adathalmazok=['mnist','cifar']
     modellek=['mlp','cnn']
     act_users=5
@@ -91,7 +91,7 @@ def arguments(args):
     args.model=data.model
     args.dataset=data.dataset
     args.num_users=data.act_users
-    args.frac=data.act_do
+    #args.frac=data.act_do
     args.lr=data.act_lr
     return args
 def init():
