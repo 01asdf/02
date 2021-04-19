@@ -10,7 +10,9 @@ Választhatóak:
 1.config_number: El lehet dönteni, hogy mely konfigurációs fileból szeretnéd, hogy megmond melyik résztvevőnek milyen arányban legyenek képei az egyes számokból. Ha 0 akkor a labeling.py-ban szereplő függvény kötelessége egy tömbben megadni, hogy mekkorák ezek az arányok. A tömb méretének minimum a userek számával kell egyenlőnek lennie.
 
 2.model: megadható, hogy milyen modell legyen használva (mlp, cnn).
+
 3.dataset: megadható, hogy milyen dataset legyen használva (mnist, cifar).
+
 4.num_users: a résztvevők száma.
 
 A program futási folyamata:
