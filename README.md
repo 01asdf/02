@@ -10,8 +10,8 @@ Választhatóak:
 1.config_number: El lehet dönteni, hogy mely konfigurációs fileból szeretnéd, hogy megmond melyik résztvevőnek milyen arányban legyenek képei az egyes számokból. Ha 0 akkor a labeling.py-ban szereplő függvény kötelessége egy tömbben megadni, hogy mekkorák ezek az arányok. A tömb méretének minimum a userek számával kell egyenlőnek lennie.
 
 2.model: megadható, hogy milyen modell legyen használva (mlp, cnn)
-4.dataset: megadható, hogy milyen dataset legyen használva (mnist, cifar)
-5.num_users: a résztvevők száma
+3.dataset: megadható, hogy milyen dataset legyen használva (mnist, cifar)
+4.num_users: a résztvevők száma
 
 A program futási folyamata:
 1. Elindul a vezerlo.py. (Jelen pillanatban dinamikusan vannak változtatva a modellek és a dataset-ek.) Ha az adatok.data.image_initialization=True akkor az adatok.py init függvénye felülírja azokat az argumentumokat amiket nála lehet beállítani, majd elindul a federated.py, de nem fog végigfutni, csak az adatok.data osztályába betöltődnek a késöbbi futásokkor használandó képek indexei.
