@@ -8,13 +8,12 @@ def main():
         for m in adatok.data.modellek:
             adatok.data.model=m
             adatok.data.dataset=a
-
+            sys.stdout=open("kiserlet_"+m+"_"+a+".txt",'w')
             if adatok.data.image_initialization:
                 adatok.init()
                 federated_main.main()
 
             federated_main.main()
-            return
                             
 
 main()
