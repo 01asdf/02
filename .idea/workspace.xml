@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e672d76-4ac4-41dd-b7a8-808e1ea6e634" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/adatok.py" beforeDir="false" afterPath="$PROJECT_DIR$/adatok.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/federated_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/federated_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kiserlet_mlp_mnist_0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/kiserlet_mlp_mnist_0.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/teszt.py" beforeDir="false" afterPath="$PROJECT_DIR$/teszt.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vezerlo.py" beforeDir="false" afterPath="$PROJECT_DIR$/vezerlo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/config4.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

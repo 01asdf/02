@@ -3,7 +3,7 @@ import labeling
 
 class data:
     outputfile=""
-    config_number=0
+    config_number=4
     model='mlp'
     dataset='mnist'
 
