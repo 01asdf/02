@@ -3,7 +3,7 @@ import labeling
 
 class data:
     outputfile=""
-    config_number=0
+    config_number=3
     model='mlp'
     dataset='mnist'
 
@@ -46,19 +46,21 @@ class data:
 
     # Hány képet kapjon a résztvevő
     user_images_count = [
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200,200,200,200,200,
-        200
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000,
+        2000,2000,2000,2000,2000
     ]
 
 
@@ -80,21 +82,26 @@ def arguments(args):
     args.num_users=data.num_users
     return args
 def init():
-
     data.dict_users= {i: np.array([]) for i in range(data.num_users)}
     for i in range(data.num_users):
         data.user_images_indexes.append([])
     #Adatok ellenőrzése
     data.data_are_correct = is_data_correct()
-
-
     if data.config_number==0:
         data.user_labels_percents=labeling.labeling(data.num_users)
     else:
         f = open("config"+str(data.config_number)+".txt", "r")
-        s= f.read()
-        data.user_labels_percents.append(list(f.read().split(' ')))
-        data.user_labels_percents.remove(data.user_labels_percents[len(data.user_labels_percents)-1])
+        line ="1"
+        while line!="":
+            line=f.readline()
+            if line !="":
+                data.user_labels_percents.append(list(line.replace('\n','').split(' ')))
+
+        for user in range(0,len(data.user_labels_percents)):
+            for g in range(0,len(data.user_labels_percents[user])):
+                data.user_labels_percents[user][g]=int(data.user_labels_percents[user][g])
+
+
     if not data.data_are_correct != False:  #Ha nem helyesek az adatok visszatérünk
         return
 

@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e672d76-4ac4-41dd-b7a8-808e1ea6e634" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/adatok.py" beforeDir="false" afterPath="$PROJECT_DIR$/adatok.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/federated_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/federated_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/options.py" beforeDir="false" afterPath="$PROJECT_DIR$/options.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sampling.py" beforeDir="false" afterPath="$PROJECT_DIR$/sampling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/update.py" beforeDir="false" afterPath="$PROJECT_DIR$/update.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kiserlet_mlp_mnist_0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/kiserlet_mlp_mnist_0.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teszt.py" beforeDir="false" afterPath="$PROJECT_DIR$/teszt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vezerlo.py" beforeDir="false" afterPath="$PROJECT_DIR$/vezerlo.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +51,48 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="kiertekelo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/bin/python3.8" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kiertekelo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="teszt" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="02" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/teszt.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="vezerlo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -74,11 +117,23 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.vezerlo" />
+        <item itemvalue="Python.teszt" />
+        <item itemvalue="Python.kiertekelo" />
         <item itemvalue="Python.federated_main" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5e672d76-4ac4-41dd-b7a8-808e1ea6e634" name="Default Changelist" comment="" />
+      <created>1619774840164</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619774840164</updated>
+    </task>
+    <servers />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>

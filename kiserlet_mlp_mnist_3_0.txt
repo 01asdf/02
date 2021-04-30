@@ -1,0 +1,50 @@
+
+Experimental details:
+    Model     : mlp
+    Optimizer : sgd
+    Learning  : 0.01
+    Global Rounds   : 50
+
+    Federated parameters:
+    Non-IID
+    Fraction of users  : 0.1
+    Local Batch size   : 10
+    Local Epochs       : 1
+
+
+Experimental details:
+    Model     : mlp
+    Optimizer : sgd
+    Learning  : 0.01
+    Global Rounds   : 50
+
+    Federated parameters:
+    Non-IID
+    Fraction of users  : 0.1
+    Local Batch size   : 10
+    Local Epochs       : 1
+
+Results
+ 0 
+ [0] 
+ [1, 0, 0, 0, 0] 
+ 0.9953810623556582 
+
+Results
+ 0 
+ [0] 
+ [1, 1, 1, 1, 1] 
+ 0.33235867446393763 
+
+Results
+ 0 
+ [0, 2] 
+ [0, 0, 1, 0, 0] 
+ 0.7342995169082126 
+
+Results
+ 0 
+ [0, 2] 
+ [1, 1, 1, 1, 1] 
+ 0.6057504873294347 
+

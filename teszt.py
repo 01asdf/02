@@ -1,4 +1,11 @@
-import vezerlo
+
+import random
+
 
 def teszt():
-    print("AAAAAAAAAAAAA")
+    list=[]
+    for i in range(0,23):
+        list.append(i)
+    random.shuffle(list)
+    print(list)
+teszt()

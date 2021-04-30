@@ -5,6 +5,7 @@
 
 import os
 import copy
+import random
 import time
 import pickle
 import numpy as np
@@ -89,24 +90,26 @@ def main():
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
 
-        for i1 in adatok.data.train_groups_in_binary:
-            adatok.data.actual_train_group_in_binary = i1
+        trainers=list(range(0,adatok.data.num_users))
+        random.shuffle(trainers)
+        trained=[]
+        aggregation_weights = []
+        for i1 in trainers:
+            trained.append(i1)
             modell_to_aggregate = copy.deepcopy(global_model)
             modell_to_aggregate.to(device)
             modell_to_aggregate.train()
-            aggregation_weights = []
-            for j in range(len(i1)):
-                if i1[j] == 1:
-                    aggregation_weights.append(local_weights[j])
+            aggregation_weights.append(local_weights[i1])
             avarege_w = average_weights(aggregation_weights)
             modell_to_aggregate.load_state_dict(avarege_w)
             modell_to_aggregate.eval()
             # Test inference after completion of training
             for i2 in adatok.data.test_groups_in_binary:
-                adatok.data.actual_test_group_in_binary = i2
-                test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
-                print("Results\n", epoch, "\n", adatok.data.actual_train_group_in_binary, "\n",
-                      adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
+                if sum(i2)==1 or sum(i2)==args.num_users:
+                    adatok.data.actual_test_group_in_binary = i2
+                    test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
+                    print("Results\n", epoch, "\n", trained, "\n",
+                          adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
 
 
 
