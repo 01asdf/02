@@ -20,6 +20,11 @@ from models import MLP, CNNMnist, CNNFashion_Mnist, CNNCifar
 from utils import get_dataset, average_weights, exp_details
 import adatok
 
+def ellentett(list1, list2):
+    for i in range(0,len(list2)):
+        if list1[i] == list2[i]:
+            return False
+    return True
 
 def main():
     start_time = time.time()
@@ -94,7 +99,8 @@ def main():
         random.shuffle(trainers)
         trained=[]
         aggregation_weights = []
-        for i1 in trainers:
+        #DataShapleynek
+        '''for i1 in trainers:
             trained.append(i1)
             modell_to_aggregate = copy.deepcopy(global_model)
             modell_to_aggregate.to(device)
@@ -108,11 +114,61 @@ def main():
                 if sum(i2)==1 or sum(i2)==args.num_users:
                     adatok.data.actual_test_group_in_binary = i2
                     test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
-                    print("Results\n", epoch, "\n", trained, "\n",
-                          adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
+                    print("DataShapley\n", epoch, "\n", trained, "\n",
+                          adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")'''
+        #4ertekesnek
+        for i in adatok.data.train_groups_in_binary:
+            if sum(i)==1:
+                aggregation_weights = [local_weights[i.index(1)]]
+                modell_to_aggregate = copy.deepcopy(global_model)
+                modell_to_aggregate.to(device)
+                modell_to_aggregate.train()
+                avarege_w = average_weights(aggregation_weights)
+                modell_to_aggregate.load_state_dict(avarege_w)
+                modell_to_aggregate.eval()
 
+                for i2 in adatok.data.test_groups_in_binary:
+                    if i2==i or sum(i2)==args.num_users:
+                        adatok.data.actual_test_group_in_binary = i2
+                        test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
+                        print("FourValues\n", epoch, "\n", i, "\n",
+                              adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
 
+            if sum(i)==args.num_users-1:
+                aggregation_weights = []
+                for j in range(0,len(i)):
+                    if i[j] == 1 :
+                        aggregation_weights.append(local_weights[j])
+                modell_to_aggregate = copy.deepcopy(global_model)
+                modell_to_aggregate.to(device)
+                modell_to_aggregate.train()
+                avarege_w = average_weights(aggregation_weights)
+                modell_to_aggregate.load_state_dict(avarege_w)
+                modell_to_aggregate.eval()
 
+                for i2 in adatok.data.test_groups_in_binary:
+                    if ellentett(i2,i) or sum(i2)==args.num_users:
+                        adatok.data.actual_test_group_in_binary = i2
+                        test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
+                        print("FourValues\n", epoch, "\n", i, "\n",
+                              adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
+            if sum(i) == args.num_users:
+                aggregation_weights = []
+                for k in local_weights:
+                    aggregation_weights.append(k)
+                modell_to_aggregate = copy.deepcopy(global_model)
+                modell_to_aggregate.to(device)
+                modell_to_aggregate.train()
+                avarege_w = average_weights(aggregation_weights)
+                modell_to_aggregate.load_state_dict(avarege_w)
+                modell_to_aggregate.eval()
+
+                for i2 in adatok.data.test_groups_in_binary:
+                    if sum(i2)==1 or sum(i2)==args.num_users:
+                        adatok.data.actual_test_group_in_binary = i2
+                        test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
+                        print("FourValues\n", epoch, "\n", i, "\n",
+                              adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
 
 
         # update global weights
