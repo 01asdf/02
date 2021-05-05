@@ -100,7 +100,7 @@ def main():
         trained=[]
         aggregation_weights = []
         #DataShapleynek
-        '''for i1 in trainers:
+        for i1 in trainers:
             trained.append(i1)
             modell_to_aggregate = copy.deepcopy(global_model)
             modell_to_aggregate.to(device)
@@ -115,7 +115,7 @@ def main():
                     adatok.data.actual_test_group_in_binary = i2
                     test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
                     print("DataShapley\n", epoch, "\n", trained, "\n",
-                          adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")'''
+                          adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
         #4ertekesnek
         for i in adatok.data.train_groups_in_binary:
             if sum(i)==1:
