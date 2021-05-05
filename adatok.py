@@ -4,6 +4,7 @@ import labeling
 class data:
     outputfile=""
     config_number=4
+    num_users = 5
     model='mlp'
     dataset='mnist'
 
@@ -31,7 +32,7 @@ class data:
     # Hova legyenek kiírva az eredmények
     results_path = 'eredmenyek.txt'
     # A kísérlet paraméterei
-    num_users = 5
+
 
     #Még nem használható
     secure_aggregation = False  # A false azt jelenti, hogy minden tanítási kombinációt minden teszt kombinációval végignéz

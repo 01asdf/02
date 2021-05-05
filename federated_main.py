@@ -111,7 +111,7 @@ def main():
             modell_to_aggregate.eval()
             # Test inference after completion of training
             for i2 in adatok.data.test_groups_in_binary:
-                if sum(i2)==1 or sum(i2)==args.num_users:
+                if sum(i2)==args.num_users:
                     adatok.data.actual_test_group_in_binary = i2
                     test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
                     print("DataShapley\n", epoch, "\n", trained, "\n",
@@ -128,7 +128,7 @@ def main():
                 modell_to_aggregate.eval()
 
                 for i2 in adatok.data.test_groups_in_binary:
-                    if i2==i or sum(i2)==args.num_users:
+                    if i2==i:
                         adatok.data.actual_test_group_in_binary = i2
                         test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
                         print("FourValues\n", epoch, "\n", i, "\n",
@@ -147,7 +147,7 @@ def main():
                 modell_to_aggregate.eval()
 
                 for i2 in adatok.data.test_groups_in_binary:
-                    if ellentett(i2,i) or sum(i2)==args.num_users:
+                    if ellentett(i2,i):
                         adatok.data.actual_test_group_in_binary = i2
                         test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
                         print("FourValues\n", epoch, "\n", i, "\n",
@@ -164,7 +164,7 @@ def main():
                 modell_to_aggregate.eval()
 
                 for i2 in adatok.data.test_groups_in_binary:
-                    if sum(i2)==1 or sum(i2)==args.num_users:
+                    if sum(i2)==1:
                         adatok.data.actual_test_group_in_binary = i2
                         test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
                         print("FourValues\n", epoch, "\n", i, "\n",
