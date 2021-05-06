@@ -95,27 +95,28 @@ def main():
             local_weights.append(copy.deepcopy(w))
             local_losses.append(copy.deepcopy(loss))
 
-        trainers=list(range(0,adatok.data.num_users))
-        random.shuffle(trainers)
-        trained=[]
-        aggregation_weights = []
-        #DataShapleynek
-        for i1 in trainers:
-            trained.append(i1)
-            modell_to_aggregate = copy.deepcopy(global_model)
-            modell_to_aggregate.to(device)
-            modell_to_aggregate.train()
-            aggregation_weights.append(local_weights[i1])
-            avarege_w = average_weights(aggregation_weights)
-            modell_to_aggregate.load_state_dict(avarege_w)
-            modell_to_aggregate.eval()
-            # Test inference after completion of training
-            for i2 in adatok.data.test_groups_in_binary:
-                if sum(i2)==args.num_users:
-                    adatok.data.actual_test_group_in_binary = i2
-                    test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
-                    print("DataShapley\n", epoch, "\n", trained, "\n",
-                          adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
+        for sample in range(0, adatok.data.num_users*3):
+            trainers=list(range(0,adatok.data.num_users))
+            random.shuffle(trainers)
+            trained=[]
+            aggregation_weights = []
+            #DataShapleynek
+            for i1 in trainers:
+                trained.append(i1)
+                modell_to_aggregate = copy.deepcopy(global_model)
+                modell_to_aggregate.to(device)
+                modell_to_aggregate.train()
+                aggregation_weights.append(local_weights[i1])
+                avarege_w = average_weights(aggregation_weights)
+                modell_to_aggregate.load_state_dict(avarege_w)
+                modell_to_aggregate.eval()
+                # Test inference after completion of training
+                for i2 in adatok.data.test_groups_in_binary:
+                    if sum(i2)==args.num_users:
+                        adatok.data.actual_test_group_in_binary = i2
+                        test_acc, test_loss = test_inference(args, modell_to_aggregate, test_dataset)
+                        print("DataShapley\n", epoch, "\n", sample, "\n", trained, "\n",
+                              adatok.data.actual_test_group_in_binary, "\n", test_acc, "\n")
         #4ertekesnek
         for i in adatok.data.train_groups_in_binary:
             if sum(i)==1:

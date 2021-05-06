@@ -13,7 +13,6 @@ def main():
                 if adatok.data.image_initialization:
                     adatok.init()
                     federated_main.main()
-
                 federated_main.main()
 
 

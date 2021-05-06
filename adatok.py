@@ -119,10 +119,13 @@ def init():
                 data.train_groups_in_binary.append(binary)
 
     else:
-        for i in range(1, 2 ** data.num_users):
-            binary = numberToBinary(i)
-            data.train_groups_in_binary.append(binary)
-            data.test_groups_in_binary.append(binary)
+        if len(data.test_groups_in_binary)==0:
+            for i in range(1, 2 ** data.num_users):
+                binary = numberToBinary(i)
+                if sum(binary) ==1 or sum(binary)>=data.num_users-1:
+                    data.train_groups_in_binary.append(binary)
+                if sum(binary) ==1 or sum(binary)==data.num_users:
+                    data.test_groups_in_binary.append(binary)
         #data.train_groups_in_binary.append(numberToBinary((2**data.num_users)-1))
 
     data.actual_test_group_in_binary =  data.test_groups_in_binary[0]
