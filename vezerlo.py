@@ -9,7 +9,7 @@ def main():
             for m in adatok.data.modellek:
                 adatok.data.model=m
                 adatok.data.dataset=a
-                sys.stdout=open("optimalizalt_"+str(adatok.data.num_users)+"_"+m+"_"+a+"_"+str(adatok.data.config_number)+"_"+str(db)+".txt",'w')
+                sys.stdout=open("sokdatashapley_"+str(adatok.data.num_users)+"_"+m+"_"+a+"_"+str(adatok.data.config_number)+"_"+str(db)+".txt",'w')
                 if adatok.data.image_initialization:
                     adatok.init()
                     federated_main.main()

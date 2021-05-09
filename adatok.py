@@ -4,7 +4,7 @@ import labeling
 class data:
     outputfile=""
     config_number=4
-    num_users = 5
+    num_users = 25
     model='mlp'
     dataset='mnist'
 
